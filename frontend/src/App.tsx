@@ -10,6 +10,7 @@ import About from "./components/pages/About";
 import Logout from "./components/pages/Logout";
 import axios from "axios";
 import calculateAge from "./utils/CalculateAge";
+import { ToastContainer } from "react-toastify";
 
 interface User {
   id: number;
@@ -99,6 +100,7 @@ function App() {
         </UserContext.Provider>
       </AuthContext.Provider>
     </BrowserRouter>
+
   );
 }
 
