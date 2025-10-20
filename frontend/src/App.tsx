@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import "./App.css";
 import Header from "./components/Header";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Home from "./components/pages/Home";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
@@ -10,7 +10,8 @@ import About from "./components/pages/About";
 import Logout from "./components/pages/Logout";
 import axios from "axios";
 import calculateAge from "./utils/CalculateAge";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface User {
   id: number;
@@ -86,19 +87,24 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
-      <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
-        <UserContext.Provider value={{ user, setUser }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/fav" element={<Favourite />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/logout" element={<Logout />} />
-          </Routes>
-        </UserContext.Provider>
-      </AuthContext.Provider>
+      <div className="min-h-screen ">
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+          <UserContext.Provider value={{ user, setUser }}>
+          <Header />
+                <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/fav" element={<Favourite />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/logout" element={<Logout />} />
+                </Routes>
+              </main>
+            <ToastContainer />
+          </UserContext.Provider>
+        </AuthContext.Provider>
+      </div>
     </BrowserRouter>
 
   );
